@@ -10,7 +10,6 @@ function preload() {
 }
 function setup() {
   
-
   gravity = createVector(0, 0.03);
   this.create_canvas();
   this.hightlight_backgrounds.calculate_image_ratio();
@@ -51,9 +50,12 @@ function draw() {
   this.music1.show_subtitle_fun();
 
   
+
+  
 }
 function set_colour(total_amp) {
   if (total_amp < music_data.bin_value_limit) {
     this.colour = map(total_amp, 0, 65792, 0, 300);
   }
 }
+

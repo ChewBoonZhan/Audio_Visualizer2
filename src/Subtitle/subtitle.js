@@ -8,11 +8,9 @@ class Subtitle{
         this.default_pos_y = window.innerHeight/4*3;
         this.position_x = this.default_pos_x;
         this.position_y = this.default_pos_y;
-        this.change_in_pos_x = 20;
-        this.change_in_pos_y = 10;
-        this.text_noise_x = new Perlin_Noise(0.01);
-        this.text_noise_y = new Perlin_Noise(0.005);
-        
+        this.changing_sub = false;
+        this.color = color("white");
+        this.alpha = 255;
 
     }
 
@@ -26,19 +24,43 @@ class Subtitle{
                 if(this.subtitle_index < this.max_subtitle_length){
                     this.subtitle_index++;
                     this.runtime_subtitle = subtitles.subtitles[this.subtitle_index][0];
+
+                    this.changing_sub = true;
                 }
                 
             }
         }
-
-        fill("white");
-        textSize(30);
+        push();
+        translate(this.position_x,this.position_y);
+        textSize(Math.floor(window.innerWidth/40));
         textAlign(CENTER);
+        this.color = color("white");
+        if(this.changing_sub){
+            if(this.alpha >0){
+                this.alpha -=17;
+            }
+            else{
+                
+                this.changing_sub = false;
+            }
+            this.color.setAlpha(this.alpha);
+            fill(this.color);
         
-        this.position_x = this.text_noise_x.get_noise(this.default_pos_x-this.change_in_pos_x,this.default_pos_x+this.change_in_pos_x);
-        this.position_y = this.text_noise_y.get_noise(this.default_pos_y-this.change_in_pos_y,this.default_pos_y+this.change_in_pos_y);
+            text(subtitles.subtitles[this.subtitle_index-1][1],0,0);    
+
+        }
+        else{
+            if(this.alpha <255){
+                this.alpha+=17;
+            }
+            this.color.setAlpha(this.alpha);
+            fill(this.color);
         
-        text(subtitles.subtitles[this.subtitle_index][1],this.position_x,this.position_y);
+            text(subtitles.subtitles[this.subtitle_index][1],0,0);    
+        }
+        
+        pop();
+        
 
         
     }
@@ -48,6 +70,9 @@ class Subtitle{
 
         this.position_x = this.default_pos_x;
         this.position_y = this.default_pos_y;
+
+        
+        
     }
     reset_runtime(){
         this.runtime_subtitle = 0;
@@ -55,7 +80,9 @@ class Subtitle{
         
         this.position_x = this.default_pos_x;
         this.position_y = this.default_pos_y;
-
+        
+        this.changing_sub = false;
+        this.alpha = 255;
     }
     
 }

@@ -2,6 +2,7 @@ class music {
   constructor() {
     this.subtitle1 = new Subtitle();
     this.show_subtitle = false;
+    this.subtitle_complete = true;
   }
   init_music() {
     this.music = loadSound("../src/music/resources/love_somebody.mp3");
@@ -9,18 +10,19 @@ class music {
   handle_pause_play() {
     
     if (this.music.isPlaying()) {
-      
-      this.music.stop();
       this.subtitle1.reset_runtime();
       this.show_subtitle = false;
+      this.subtitle_complete = false;
       
-    } else {
+      this.music.stop();
       
-      this.music.play();
+    } 
+    else {
       this.show_subtitle = true;
+      this.music.play();
       
     }
-    //console.log(subtitle_music);
+    
     
   }
   window_resized(){
@@ -28,8 +30,19 @@ class music {
   }
   show_subtitle_fun(){
     if(this.show_subtitle){
-
-      this.subtitle1.set_subtitle(this.get_runtime());
+      
+      if(!this.subtitle_complete){
+        if(this.get_runtime()<0.1){
+          this.subtitle1.set_subtitle(0);
+          this.subtitle_complete = true;
+          
+        }
+        
+      }
+      else{
+        this.subtitle1.set_subtitle(this.get_runtime());
+      }
+      
 
     }
     
