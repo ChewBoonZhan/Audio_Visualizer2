@@ -5,11 +5,11 @@ class Subtitle{
         this.subtitle_index = 0;
         this.max_subtitle_length = subtitles.subtitles.length - 1;
         this.default_pos_x = window.innerWidth/2;
-        this.default_pos_y = window.innerHeight/4*3;
+        this.default_pos_y = window.innerHeight/4;
         this.position_x = this.default_pos_x;
         this.position_y = this.default_pos_y;
         this.changing_sub = false;
-        this.color = color("white");
+        
         this.alpha = 255;
 
     }
@@ -32,9 +32,9 @@ class Subtitle{
         }
         push();
         translate(this.position_x,this.position_y);
-        textSize(Math.floor(window.innerWidth/40));
+        textSize(Math.floor(window.innerWidth/30));
         textAlign(CENTER);
-        this.color = color("white");
+        this.color = color("#dfc2ff");
         if(this.changing_sub){
             if(this.alpha >0){
                 this.alpha -=17;
@@ -66,13 +66,10 @@ class Subtitle{
     }
     window_resized(){
         this.default_pos_x = window.innerWidth/2;
-        this.default_pos_y = window.innerHeight/4*3;
+        this.default_pos_y = window.innerHeight/4;
 
         this.position_x = this.default_pos_x;
         this.position_y = this.default_pos_y;
-
-        
-        
     }
     reset_runtime(){
         this.runtime_subtitle = 0;

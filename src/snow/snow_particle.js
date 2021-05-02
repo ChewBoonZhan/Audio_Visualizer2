@@ -5,7 +5,7 @@ class snow_particle {
     this.init_vel();
     this.size = random(1, 30);
     this.alpha = map(this.size, 1, 30, 255, 0);
-    this.colour = color("white");
+    this.colour = color("#fdffbd");
     this.colour.setAlpha(this.alpha);
   }
   init_snow_limit(image_param) {

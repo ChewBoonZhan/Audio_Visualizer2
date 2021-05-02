@@ -5,7 +5,7 @@ class hightlight_background {
   }
   init_image() {
     this.background_image = loadImage(
-      "../src/images/resources/background_image.jpg"
+      "../src/images/resources/background.png"
     );
   }
 

@@ -10,7 +10,7 @@ function preload() {
 }
 function setup() {
   
-  gravity = createVector(0, 0.03);
+  gravity = createVector(0.0001, 0.03);
   this.create_canvas();
   this.hightlight_backgrounds.calculate_image_ratio();
   this.hightlight_backgrounds.initialize_image_parameter();
@@ -21,6 +21,11 @@ function setup() {
   this.detect_music_amp = new detect_amp();
 
   this.amp_bars1 = new amp_bars(this.hightlight_backgrounds.get_parameter());
+
+  this.star_population = new star_collection(this.hightlight_backgrounds.get_parameter());
+
+  this.comet_handler = new comet_handler(this.hightlight_backgrounds.get_parameter());
+  
 }
 function windowResized() {
   this.create_canvas();
@@ -29,6 +34,9 @@ function windowResized() {
   this.snows.set_image_param(this.hightlight_backgrounds.get_parameter());
   this.amp_bars1.init_x_and_y(this.hightlight_backgrounds.get_parameter());
   this.music1.window_resized();
+
+  this.star_population.window_resized(this.hightlight_backgrounds.get_parameter());
+  this.comet_handler.window_resized(this.hightlight_backgrounds.get_parameter());
 }
 this.create_canvas = function () {
   createCanvas(window.innerWidth, window.innerHeight);
@@ -42,6 +50,8 @@ function draw() {
   background(this.colour);
 
   this.hightlight_backgrounds.show_image();
+
+  this.star_population.show();
   
   this.snows.show();
 
@@ -49,8 +59,7 @@ function draw() {
 
   this.music1.show_subtitle_fun();
 
-  
-
+  this.comet_handler.show();  
   
 }
 function set_colour(total_amp) {

@@ -11,7 +11,7 @@ class Snow {
     this.image_param = image_param;
   }
   show() {
-    if (Math.random() > 0.90) {
+    if (Math.random() > 0.98) {
       this.snows.push(new snow_particle(this.image_param));
     }
 
